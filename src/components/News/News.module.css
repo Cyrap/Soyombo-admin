@@ -1,0 +1,54 @@
+.con{
+    padding-bottom: 100px;
+    /* background: rgb(35, 205, 182); */
+}
+.news{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* background: red; */
+    padding: 30px 0px;
+}
+.header{
+    font-weight: 600;
+    padding: 20px;
+    /* background: rgb(28, 124, 207); */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.486);
+}
+.userCon{
+    background: rgb(60, 63, 60);
+    padding: 0px 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.428);
+}
+.user{
+    /* background: rgb(224, 62, 226); */
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+.userName{
+    /* background: rgb(215, 140, 20); */
+    color: black;
+    padding: 0px 10px;
+}
+.userImg{
+    /* background: green; */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px
+}
+.content{
+    padding: 20px 5vw;
+    /* background: rgb(176, 150, 150); */
+    min-height: 50vh;
+}
+.contentImg{
+    /* background: gray; */
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}

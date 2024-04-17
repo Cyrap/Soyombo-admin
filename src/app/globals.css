@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+button {
+  position: relative;
+}
+
+button img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+body {
+  overflow-x: hidden;
+}
+/* Set the width and color of the scrollbar track (the area behind the thumb) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Customize the scrollbar thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: rgb(188, 192, 201); /* Set the background color of the thumb */
+  border-radius: 6px; /* Add rounded corners to the thumb */
+}
+
+/* Customize the scrollbar track when the mouse hovers over it */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(143, 189, 223); /* Change the background color on hover */
+}
