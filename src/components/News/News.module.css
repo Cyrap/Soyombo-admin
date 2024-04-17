@@ -1,6 +1,7 @@
 .con{
     padding-bottom: 100px;
     /* background: rgb(35, 205, 182); */
+    
 }
 .news{
     display: flex;
@@ -12,8 +13,8 @@
 .header{
     font-weight: 600;
     padding: 20px;
+    font-size: 2rem;
     /* background: rgb(28, 124, 207); */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.486);
 }
 .userCon{
     /* background: rgb(60, 63, 60); */

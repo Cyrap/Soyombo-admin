@@ -15,15 +15,19 @@ export default function NewsDetailPage({ params }: {
   console.log(news);
   return (
     <div>
-      {!id || !news ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-        <Navbar/>
-        <News {...news} />
-        <Footer/>
-        </>
-      )}
-    </div>
+    {!id || !news ? (
+      <div>Loading...</div>
+    ) : (
+      <>
+        <Navbar />
+        <div className="flex flex-col justify-center items-center pt-[20px] ">
+            <div className="w-full max-w-[80vw]">
+                <News {...news}/>
+            </div>
+        </div>
+        <Footer />
+      </>
+    )}
+  </div>  
   );
 }
