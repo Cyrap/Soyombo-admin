@@ -15,7 +15,7 @@ export default function App() {
     <Dropdown>
     <DropdownTrigger>
       <div className="relative">
-        <button className="h-[3rem] w-[3rem] rounded-full overflow-hidden flex justify-center items-center">
+        <button className="h-[2.4rem] w-[2.4rem] rounded-full overflow-hidden flex justify-center items-center">
           <Image
             src={userImage || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5958mvxyOALrWelcizzxdX48KqChi9Vh2Sr_NETQ&s'} 
             className="object-cover rounded-full" 

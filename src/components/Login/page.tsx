@@ -1,5 +1,4 @@
 "use client";
-import Navbar from "../../components/Navbar/Navbar";
 import React, { useState } from "react";
 import { auth } from "@/firebase/firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
@@ -34,10 +33,9 @@ const Login = () => {
 
   return (
     <>
-      <Navbar />
       <div className="min-h-screen flex items-center justify-center ">
-        <div className="bg-white p-8 rounded shadow-md w-96">
-          <h2 className="text-2xl font-bold mb-4">Login</h2>
+        <div className="border-1 p-8 rounded shadow-md w-96">
+          <h2 className="text-2xl font-bold mb-4">Нэвтрэх</h2>
           <div>
             <div className="mb-4">
               <label

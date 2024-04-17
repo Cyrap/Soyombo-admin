@@ -1,7 +1,6 @@
 'use client'
 import { getPostData } from '../../../lib/post';
 import News from '@/components/News/News';
-import Navbar2 from '@/components/Navbar/Navbar2';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 interface Params {
@@ -20,7 +19,6 @@ export default function NewsDetailPage({ params }: {
         <div>Loading...</div>
       ) : (
         <>
-        <Navbar2/>
         <Navbar/>
         <News {...news} />
         <Footer/>

@@ -16,7 +16,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.486);
 }
 .userCon{
-    background: rgb(60, 63, 60);
+    /* background: rgb(60, 63, 60); */
     padding: 0px 5vw;
     display: flex;
     justify-content: space-between;
