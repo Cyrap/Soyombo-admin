@@ -4,7 +4,6 @@ import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, Navbar
 import {AcmeLogo} from "./Logo";
 import { useUser } from "@/context/UserContext";
 import UserDropdown from "./UserDropdown";
-import SubNavbar from "./SubNavbar"
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const user  = useUser();
@@ -16,7 +15,6 @@ export default function App() {
 
   return (
     <>
-    <SubNavbar/>
     <Navbar onMenuOpenChange={setIsMenuOpen} className="customcss">
       <NavbarContent>
         <NavbarMenuToggle
@@ -29,15 +27,7 @@ export default function App() {
         </Link>
         </NavbarBrand>
       </NavbarContent>
-
-      {/* <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-      </NavbarContent> */}
-
+      
       <NavbarContent justify="end">
         {!user?.user && 
         <NavbarItem>

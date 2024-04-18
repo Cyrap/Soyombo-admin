@@ -42,7 +42,7 @@ const News: React.FC<NewsProps> = ({
                             </div>
                         </div>
                         <div>
-                            <Share/>
+                            <Share header = {header}/>
                         </div>
                     </div>
                     {content ? ( // Check if content is not null or undefined

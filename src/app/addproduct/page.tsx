@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { Timestamp } from "firebase/firestore";
 import { ref, uploadBytes ,getDownloadURL} from "firebase/storage";
@@ -10,22 +10,24 @@ import { storage, db } from '../../firebase/firebase';
 import Navbar from "@/components/Navbar/Navbar";
 import { useUser } from "@/context/UserContext";
 import { Spinner } from "@nextui-org/react";
-
+import {Input,Select, SelectItem,Textarea,Button} from "@nextui-org/react";
 const CarRegister = () => {
-  const [fileUpload, setFileUpload] = useState(null);
+  const [fileUpload, setFileUpload] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const user = useUser();
-  const userId = user?.user?.uid;
-  const productCollectionRef = collection(db, "Posts");
-
+  const [category, setCategory] = useState('');
+  const [categoryType, setCategoryType] = useState<string[]>([]);
+  const [about, setAbout] = useState('');
   const [formValues, setFormValues] = useState({
     newsDate:new Date(),
     newsImageURL:'https://www.nasa.gov/wp-content/uploads/2024/04/53641212344-be1e94e20c-o.jpg?resize=900,600',
     newsHeader:'',
     ownerId:'',
-    newsContent:''
+    newsContent:'',
   });
 
+  const user = useUser();
+  const userId = user?.user?.uid;
+  const productCollectionRef = collection(db, "Posts");
 
   const onSubmitProduct = async () => {
     try {
@@ -37,7 +39,9 @@ const CarRegister = () => {
         imageURL: formValues.newsImageURL,
         header: formValues.newsHeader,
         ownerId: userId,
-        content: formValues.newsContent
+        content: formValues.newsContent,
+        category: category,
+        about: about
       };
       const productRef = await addDoc(productCollectionRef, news);
       const imageUUID = uuidv4();
@@ -59,46 +63,87 @@ const CarRegister = () => {
         newsImageURL:'https://www.nasa.gov/wp-content/uploads/2024/04/53641212344-be1e94e20c-o.jpg?resize=900,600',
         newsHeader:'',
         ownerId:'',
-        newsContent:'',
+        newsContent:''
       });
-  
-      alert("Post successfully");
     } catch (err) {
       console.error(err);
     } finally {
       setIsSubmitting(false);
     }
   };
-  
+
+  useEffect(() => {
+    switch(category){
+      case "sport":
+        setCategoryType(["basketball", "soccer","golf"]);
+        break;
+      case "politics":
+        setCategoryType(["health","criminal","etc"]);
+        break;
+      // Add cases for other categories
+      default:
+        setCategoryType([]);
+    }
+  }, [category]);
+
+  const categoryOptions = [
+    {label: "Спорт", value: "sport"},
+    {label: "Улс төр", value: "politics"},
+    ];
   return (
     <>
-      <Navbar />
-      <div className="max-w-md h-[100vh] mx-auto p-4 pt-[100px] space-y-4 items-center">
-      <h3 className="text-lg font-semibold">Мэдээ оруулах</h3>
-        <input
-     className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500"
-     placeholder="Гарчиг"
-    value={formValues.newsHeader}
-    type="text"
-    onChange={(e) => setFormValues({...formValues, newsHeader:e.target.value})}
-  />
-<textarea
-  className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500"
-  placeholder="Текст"
-  value={formValues.newsContent}
-  onChange={(e) => {
-    const contentWithLineBreaks = e.target.value.replace(/\n/g, "<br>");
-    setFormValues({...formValues, newsContent: contentWithLineBreaks});
-  }}
-/>
+      <div className="max-w-md mx-auto p-4 pt-[100px] space-y-4 items-center">
+        <h3 className="text-lg font-semibold">Мэдээ оруулах</h3>
+        <Input type="text" label="Гарчиг" 
+         value={formValues.newsHeader}
+         onChange={(e) => setFormValues({...formValues, newsHeader:e.target.value})}
+        />
 
-    <input type="file" onChange={(e) => {
-          const selectedFile : File | null | any = e.target.files ? e.target.files[0] : null;
-          setFileUpload(selectedFile );
+        <Select 
+        onChange={(e) => setCategory(e.target.value)}
+        label="Select an animal" 
+        className="max-w-xs" 
+      >
+        {categoryOptions.map((option) => (
+          <SelectItem key={option.value} value={option.value}>
+            {option.label}
+          </SelectItem>
+        ))}
+      </Select>
+
+
+      <Select 
+       onChange={(e)=>setAbout(e.target.value)}
+        label="Төрөл" 
+        className="max-w-xs" 
+      >
+        {categoryType.map((option) => (
+          <SelectItem key={option} value={option}>
+            {option}
+          </SelectItem>
+        ))}
+      </Select>
+
+
+ 
+    <Textarea
+       label="Текст"
+          className="w-full"
+          placeholder="Текст"
+          value={formValues.newsContent}
+          onChange={(e) => {
+            const contentWithLineBreaks = e.target.value.replace(/\n/g, "<br>");
+            setFormValues({...formValues, newsContent: contentWithLineBreaks});
+          }}
+        />
+
+        <Input type="file" onChange={(e) => {
+          const selectedFile = e.target.files ? e.target.files[0] : null;
+          setFileUpload(selectedFile);
         }} />
-        <button className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600" onClick={onSubmitProduct}>
-          {isSubmitting ? <Spinner /> : 'Submit'}
-        </button>
+        <Button color="primary" variant="bordered" onClick={onSubmitProduct}>
+        {isSubmitting ? <Spinner /> : 'Submit'}
+      </Button>  
       </div>
     </>
   );
