@@ -12,7 +12,6 @@ const Admin = () => {
             <Card>
               <CardBody>
               <div className="flex flex-col justify-center items-center pt-[50px]">
-            <h3 className="w-[80%]">Мэдээ</h3>
             <div className="w-full max-w-[80vw]">
                 <Pages />
             </div>

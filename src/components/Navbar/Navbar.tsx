@@ -29,13 +29,6 @@ export default function App() {
       </NavbarContent>
       
       <NavbarContent justify="end">
-        {!user?.user && 
-        <NavbarItem>
-          <Button as={Link} color="primary" href="/" variant="flat">
-            Нэвтрэх
-          </Button>
-        </NavbarItem>
-        }
         {user?.user &&
         <UserDropdown/>
         }

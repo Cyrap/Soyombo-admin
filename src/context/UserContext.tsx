@@ -8,12 +8,15 @@ import type { User } from "firebase/auth";
 
 type UserContextType = {
   user: User | null;
+  loading: boolean;
 };
+
 
 const UserContext = createContext<UserContextType | null>(null);
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true); // Initialize loading state as true
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
@@ -22,17 +25,19 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
       } else {
         setUser(null);
       }
+      setLoading(false); // Set loading state to false when user data is loaded
     });
 
     return () => unsubscribe();
   }, [auth]);
 
   return (
-    <UserContext.Provider value={{ user }}>
+    <UserContext.Provider value={{ user, loading }}>
       {children}
     </UserContext.Provider>
   );
 };
+
 
 export const useUser = () => {
   return useContext(UserContext);

@@ -20,7 +20,7 @@ const DeleteBtn = ({ postId, onDelete }: any) => {
     
     return (
         <>
-            <Button onPress={onOpen} color="danger" variant="bordered">Устгах</Button>
+            <Button onPress={onOpen}    aria-label="Delete"  color="danger" variant="bordered">Устгах</Button>
             <Modal 
                 backdrop="opaque" 
                 isOpen={isOpen} 

@@ -27,42 +27,6 @@ export default function App() {
       </div>
     </DropdownTrigger>
     <DropdownMenu aria-label="Static Actions">
-      <DropdownItem key="new">
-        {user?.user && (
-          <li>
-            <Link href='/addproduct'>
-              <p
-                className={clsx(
-                  'hover:text-blue-500',
-                  {
-                    'text-[#2196F3]': pathName === '/addproduct',
-                  },
-                )}
-              >
-                Мэдээ оруулах
-              </p>
-            </Link>
-          </li>
-        )}
-      </DropdownItem>
-      <DropdownItem key="copy">
-        {user?.user && (
-          <li>
-            <Link href='/ownproduct'>
-              <p
-                className={clsx(
-                  'hover:text-500',
-                  {
-                    'text-[#2196F3]': pathName === '/ownproduct',
-                  },
-                )}
-              >
-                Миний мэдээ
-              </p>
-            </Link>
-          </li>
-        )}
-      </DropdownItem>
       <DropdownItem key="delete">
         <LogoutButton/>
       </DropdownItem>
