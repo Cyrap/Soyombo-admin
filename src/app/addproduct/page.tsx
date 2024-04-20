@@ -19,7 +19,7 @@ const CarRegister = () => {
   const [about, setAbout] = useState('');
   const [formValues, setFormValues] = useState({
     newsDate:new Date(),
-    newsImageURL:'https://www.nasa.gov/wp-content/uploads/2024/04/53641212344-be1e94e20c-o.jpg?resize=900,600',
+    newsImageURL:'',
     newsHeader:'',
     ownerId:'',
     newsContent:'',
@@ -46,13 +46,13 @@ const CarRegister = () => {
       const productRef = await addDoc(productCollectionRef, news);
       const imageUUID = uuidv4();
       const imageName = `${productRef.id}_${imageUUID}`;
-      const fileFolderRef = ref(storage, `productImages/${imageName}`);
+      const fileFolderRef = ref(storage, `newsImages/${imageName}`);
   
       if (fileUpload) {
         await uploadBytes(fileFolderRef, fileUpload)
         const imageURL = await getDownloadURL(fileFolderRef);
   
-        await updateDoc(doc(db, "products", productRef.id), {
+        await updateDoc(doc(db, "Posts", productRef.id), {
           imageURL: imageURL,
         });
         setFormValues({...formValues, newsImageURL:imageURL});
@@ -60,7 +60,7 @@ const CarRegister = () => {
   
       setFormValues({
         newsDate:new Date(),
-        newsImageURL:'https://www.nasa.gov/wp-content/uploads/2024/04/53641212344-be1e94e20c-o.jpg?resize=900,600',
+        newsImageURL:'',
         newsHeader:'',
         ownerId:'',
         newsContent:''
@@ -136,11 +136,18 @@ const CarRegister = () => {
             setFormValues({...formValues, newsContent: contentWithLineBreaks});
           }}
         />
-
         <Input type="file" onChange={(e) => {
           const selectedFile = e.target.files ? e.target.files[0] : null;
           setFileUpload(selectedFile);
-        }} />
+        }}
+        className="block w-full text-sm text-slate-500
+        file:mr-4 file:py-2 file:px-4
+        file:rounded-full file:border-0
+        file:text-sm file:font-semibold
+        file:bg-violet-50 file:text-violet-700
+        hover:file:bg-violet-100
+      "
+        />
         <Button color="primary" variant="bordered" onClick={onSubmitProduct}>
         {isSubmitting ? <Spinner /> : 'Submit'}
       </Button>  
